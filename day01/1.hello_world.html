@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello world</title>
+    <script src="../lib/angular.min.js"></script>
+</head>
+<body>
+<!--
+    1. 如果想让网页支持angularJS. 那么首先得引入angularJS的JS文件, 然后在需要使用到angular的标签写入ng-app, 一般来说ng-app习惯写在html里面.
+    2. {{...AngularJS 代码}} 可以理解为在页面插入了JS... (这样做是否有不妥, 需要等深入了解了angular再作定论)
+
+    ng-app:
+    1. only one AngularJS application can be auto-bootstrapped per HTML document.
+       每个页面只有一个ng-app能被自动引导. 通常是第一个ng-app被自动引导. 如果想一个页面引导多个应用程序, 则需要通过 angular.bootstrap 手动引导.
+    2. AngularJS applications cannot be nested within each other.
+       ng-app不能嵌套
+    3. Do not use a directive that uses transclusion on the same element as ngApp.
+       在使用了ngApp的标签里面, 不要使用directive(包括ngIf, ngInclude, ngView)而使用transclusion. 通过注入的方式实现
+-->
+<div ng-app="hello_world">
+    Hello {{"World"}} !!
+</div>
+</body>
+</html>
