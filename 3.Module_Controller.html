@@ -6,14 +6,37 @@
 </head>
 <body>
 <!--
-
+    ng-app: 定义应用
+    ng-controller: 定义控制器
+    一个app有多个controller, controller可以理解为控件, 就是可以往app里面加控件.
+    而且并不是一个页面一个app, 而是一个app可以有多个html页面.
+    ------------------------
+    类似于 JavaScript 表达式，AngularJS 表达式可以包含字母，操作符，变量。
+    与 JavaScript 表达式不同，AngularJS 表达式可以写在 HTML 中。
+    与 JavaScript 表达式不同，AngularJS 表达式不支持条件判断，循环及异常。
+    与 JavaScript 表达式不同，AngularJS 表达式支持过滤器。
 -->
-<div ng-app="myApp" ng-controller="myCtrl">
+<div ng-app="myApp" ng-controller="myCtrl" ng-init="price = 100; count = 2; obj = {price: 200, count: 3}; array = [300, 4]">
 
     first Name: <input type="text" ng-model="firstName"><br>
     Last Name: <input type="text" ng-model="lastName"><br>
+    Full Name: {{firstName + "." + lastName}} <br>
     <br>
-    姓名: {{firstName + " " + lastName}}
+    <!-- 数字 -->
+    Price:  <input type="text" ng-model="price"><br>
+    count:  <input type="text" ng-model="count"><br>
+    total: {{price * count}}<br>
+    <br>
+    <!-- 对象 -->
+    Price:  <input type="text" ng-model="obj.price"><br>
+    count:  <input type="text" ng-model="obj.count"><br>
+    total: {{obj.price * obj.count}}<br>
+    <br>
+    <!-- 数组 -->
+    Price:  <input type="text" ng-model="array[0]"><br>
+    count:  <input type="text" ng-model="array[1]"><br>
+    total: {{array[0] * array[1]}}<br>
+    <br>
 
 </div>
 </body>
@@ -21,7 +44,8 @@
 <script type="text/javascript">
     var app = angular.module("myApp", []);
     app.controller("myCtrl", function($scope){
-
+        $scope.firstName = "he";
+        $scope.lastName = "zhiwei";
     });
 </script>
 </html>

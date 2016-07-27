@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>repeat</title>
+</head>
+<body>
+<!--
+    ng-app 指令:
+    ng-app 指令定义了 AngularJS 应用程序的 根元素。
+    ng-app 指令在网页加载完毕时会自动引导（自动初始化）应用程序。
+    ng-app 还能通过一个值（比如 ng-app="myModule"）连接到代码模块。
+
+    ng-init 指令:
+    ng-init 指令为 AngularJS 应用程序定义了 初始值。
+    通常情况下，不使用 ng-init。您将使用一个控制器或模块来代替它。
+
+    ng-model 指令:
+    ng-model 指令 绑定 HTML 元素 到应用程序数据。
+    ng-model 指令也可以:
+    1. 为应用程序数据提供类型验证（number、email、required）。
+    2. 为应用程序数据提供状态（invalid、dirty、touched、error）。
+    3. 为 HTML 元素提供 CSS 类。
+    4. 绑定 HTML 元素到 HTML 表单。
+
+    ng-repeat 指令:
+    ng-repeat 指令对于集合中（数组中）的每个项会 克隆一次 HTML 元素。
+
+    自定义指令:
+    1. 在app那里使用 .directive 函数来添加自定义的指令.
+    2. 使用驼峰法来命名一个指令, gsslDefined, 但在使用它时需要以 - 分割, gssl-defined
+    3. 可以通过标签名, 属性, 类名, 注释的方式来调用指令
+    4. 可以通过restrict限制指令的调用方式. E 元素 A 属性 C 类 M 注释. 默认是EA. 通过注释的格式: "directive: 自定义指令名"
+-->
+<div ng-app="app" ng-init="arr = [2, 13, 5, 16, 7]">
+    使用repeat来输出数组
+    <ul>
+        <li ng-repeat="x in arr">{{x}}</li>
+    </ul>
+    <div gssl-defined></div>
+    <div class="gssl-defined"></div>
+    <gssl-defined></gssl-defined>
+
+    <!-- directive: gssl-defined -->
+</div>
+</body>
+<script type="text/javascript" src="lib/angular.min.js"></script>
+<script type="text/javascript">
+    var app = angular.module("app", []);
+    app.directive("gsslDefined", function(){
+        return {
+            restrict: "EACM", // 限制你的指令只能通过特定的方式来调用
+            replace : true, // 是否替换容器
+            template: "<h1>人家是自定义标签拉~</h1>" // 指令内容
+        };
+    });
+</script>
+</html>
