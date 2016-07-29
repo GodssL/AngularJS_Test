@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>scope</title>
+</head>
+<body>
+    <!--
+        1. 如果$scope定义在controller里面, 那么他的作用域只在本controller里面生效.
+        2. 如果想要在module的范围内生效, 则需要使用 $rootScope. 但是$rootScope的作用域也只在module内, module外则不行了.
+        3. 一个网页可以有两个module, 每个module都可以挂多个controller. 通过angular.bootstrap来手动激活. 但是要定义完了所有的controller才能激活, 要不报错.
+    -->
+    <div ng-app="app_1">
+        app_1里面的haha: {{haha}}
+        <div ng-controller="ctrl_1">
+            {{name}}
+        </div>
+        <div ng-controller="ctrl_2">
+            {{name}}
+        </div>
+    </div>
+
+    <div ng-app="app_2" id="a2">
+        app_2里面的haha: {{haha}}
+        <div ng-controller="ctrl_2">
+            {{name}}
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="lib/angular.min.js"></script>
+<script type="text/javascript">
+    var app1 = angular.module("app_1", []);
+    app1.controller("ctrl_1", function($scope, $rootScope){
+        $scope.name = "app1_ctrl1";
+        $rootScope.haha = "haha";
+    });
+    app1.controller("ctrl_2", function($scope, $rootScope){
+        $scope.name = "app1_ctrl2";
+        $rootScope.haha = $rootScope.haha + " hehe";
+    });
+    var app2 = angular.module("app_2", []);
+    app2.controller("ctrl_2", function($scope, $rootScope){
+        $scope.name = "app2";
+        $rootScope.haha = $rootScope.haha + " xixi";
+    });
+    angular.bootstrap(document.getElementById("a2"), ["app_2"]);
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ngModel and Verification</title>
+    <style type="text/css">
+        .my_input {transition:all linear 0.5s; background: transparent;}
+        .my_input.ng-invalid {background-color: red; color: white;}
+    </style>
+</head>
+<body>
+<!--
+    ngModel:
+    1. 用于绑定应用程序数据到 HTML 控制器(input, select, textarea)的值
+    2. 可以将输入域的值与 AngularJS 创建的变量绑定
+    3. 双向绑定，在修改输入域的值时， AngularJS 属性的值也将修改
+    4. 可以为应用数据提供状态值(invalid, dirty, touched, error)
+    5. 关于不同状态下的样式:
+    The following CSS classes are added and removed on the associated input/select/textarea element depending on the validity of the model.
+    ng-valid: the model is valid
+    ng-invalid: the model is invalid
+    ng-valid-[key]: for each valid key added by $setValidity
+    ng-invalid-[key]: for each invalid key added by $setValidity
+    ng-pristine: the control hasn't been interacted with yet
+    ng-dirty: the control has been interacted with -- 控件被玷污了~ 刚加载时为false, 当被赋值之后无论如何也为true, 如果加载的时候被赋值, 也为true
+    ng-touched: the control has been blurred
+    ng-untouched: the control hasn't been blurred
+    ng-pending: any $asyncValidators are unfulfilled
+    ng-empty: the view does not contain a value or the value is deemed "empty", as defined by the ngModel.NgModelController method
+    ng-not-empty: the view contains a non-empty value
+    Keep in mind that ngAnimate can detect each of these classes when added and removed.
+
+    ngShow:
+    1. 当ngShow里面的值为true时 -- 显示;
+-->
+<form ng-app="app" ng-controller="my_ctrl" name="myForm">
+    Email:
+    <input class="my_input" type="email" name="myAddress" ng-model="text" required>
+    <h1>状态</h1>
+    <span ng-show="myForm.myAddress.$valid">$valid 为 true</span> <br/>
+    <span ng-show="myForm.myAddress.$dirty">$dirty 为 true</span> <br/>
+    <span ng-show="myForm.myAddress.$touched">$touched 为 true</span> <br/>
+    <span ng-show="myForm.myAddress.$error.email">$error.email 为 true</span> <br/>
+</form>
+</body>
+<script type="text/javascript" src="lib/angular.min.js"></script>
+<script type="text/javascript">
+    var app = angular.module("app", []);
+    app.controller("my_ctrl", function($scope){
+//        $scope.text = "hahah";
+    });
+</script>
+</html>
