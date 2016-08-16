@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>ngRouter</title>
+</head>
+<body>
+<div>
+    <div ng-view></div>
+</div>
+
+</body>
+<script type="text/javascript" src="../lib/angular.min.js"></script>
+<script type="text/javascript" src="../lib/angular-route.min.js"></script>
+<script type="text/javascript">
+    var app = angular.module("myApp", ["ngRoute"]);
+    app.controller("page_list_ctrl", function(){});
+    app.controller("page_ctrl", function($scope, $routeParams, $location){
+        // 通过location获取连接信息
+        $scope.location = $location.url();
+        $scope.AbsLocation = $location.absUrl();
+
+        $scope.params = $routeParams;
+    });
+    app.config(function($routeProvider){
+        $routeProvider
+                .when("/page_list", {
+                    templateUrl: 'views/page_list/page_list.html',
+                    controller: 'page_list_ctrl'
+                })
+                .when('/page_list/:title/:content', {
+                    templateUrl: 'views/page/page.html',
+                    controller: 'page_ctrl'
+                })
+                .otherwise({redirectTo:'#/page_list'});
+        // 是否开启h5模式 默认false 开启后路径上的#会不见了
+//        $locationProvider.html5Mode(true);
+    });
+</script>
+</html>

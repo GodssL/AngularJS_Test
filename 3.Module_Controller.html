@@ -10,6 +10,9 @@
     ng-controller: 定义控制器
     一个app有多个controller, controller可以理解为控件, 就是可以往app里面加控件.
     而且并不是一个页面一个app, 而是一个app可以有多个html页面.
+    控制器的代码一般放在不同的js文件里面以区别开来
+    * 控制器可以嵌套使用, 但ng-app则不能
+    * 由于控制器可以嵌套使用, 所以当前controller可以调用父级controller的$scope的内容, 但是不能调用其同级controller的$scope
     ------------------------
     类似于 JavaScript 表达式，AngularJS 表达式可以包含字母，操作符，变量。
     与 JavaScript 表达式不同，AngularJS 表达式可以写在 HTML 中。
@@ -37,7 +40,12 @@
     count:  <input type="text" ng-model="array[1]"><br>
     total: {{array[0] * array[1]}}<br>
     <br>
-
+    <div ng-controller="my_ctrl_2">
+        {{firstName}}
+    </div>
+    <div ng-controller="my_ctrl_3">
+        {{ctrl2}}
+    </div>
 </div>
 </body>
 <script type="text/javascript" src="lib/angular.min.js"></script>
@@ -46,6 +54,13 @@
     app.controller("myCtrl", function($scope){
         $scope.firstName = "he";
         $scope.lastName = "zhiwei";
+    });
+    app.controller("my_ctrl_2", function($scope){
+        $scope.firstName = "firstName in ctrl2";
+        $scope.ctrl2 = "ctrl2";
+    });
+    app.controller("my_ctrl_3", function($scope){
+        $scope.firstName = "my_ctrl_2"
     });
 </script>
 </html>
